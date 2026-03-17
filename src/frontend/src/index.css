@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/assets/fonts/BricolageGrotesque.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    /* Dark theme only */
+    --background: 0.09 0.008 228;
+    --foreground: 0.93 0.008 225;
+    --card: 0.16 0.015 225;
+    --card-foreground: 0.93 0.008 225;
+    --popover: 0.14 0.012 225;
+    --popover-foreground: 0.93 0.008 225;
+    --primary: 0.62 0.17 152;
+    --primary-foreground: 0.09 0.008 228;
+    --secondary: 0.2 0.015 225;
+    --secondary-foreground: 0.93 0.008 225;
+    --muted: 0.18 0.012 225;
+    --muted-foreground: 0.62 0.012 225;
+    --accent: 0.73 0.17 72;
+    --accent-foreground: 0.09 0.008 228;
+    --destructive: 0.52 0.19 25;
+    --destructive-foreground: 0.93 0.008 225;
+    --border: 0.24 0.015 225;
+    --input: 0.24 0.015 225;
+    --ring: 0.52 0.19 25;
+    /* Custom semantic tokens */
+    --pressure: 0.52 0.19 25;
+    --pressure-dark: 0.44 0.17 25;
+    --warning: 0.73 0.17 72;
+    --warning-dark: 0.62 0.17 60;
+    --success: 0.62 0.17 152;
+    --success-dark: 0.52 0.15 152;
+    --surface: 0.16 0.015 225;
+    --surface-elevated: 0.2 0.015 225;
+    --chart-1: 0.52 0.19 25;
+    --chart-2: 0.73 0.17 72;
+    --chart-3: 0.62 0.17 152;
+    --chart-4: 0.48 0.15 270;
+    --chart-5: 0.67 0.012 225;
+    --sidebar: 0.12 0.012 228;
+    --sidebar-foreground: 0.93 0.008 225;
+    --sidebar-primary: 0.52 0.19 25;
+    --sidebar-primary-foreground: 0.93 0.008 225;
+    --sidebar-accent: 0.2 0.015 225;
+    --sidebar-accent-foreground: 0.93 0.008 225;
+    --sidebar-border: 0.24 0.015 225;
+    --sidebar-ring: 0.52 0.19 25;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  }
+  .font-mono-display {
+    font-family: "JetBrains Mono", monospace;
+  }
+}
+
+/* Focus mode pulse border */
+@keyframes focusPulse {
+  0%,
+  100% {
+    box-shadow: inset 0 0 0 3px oklch(0.52 0.19 25 / 0.3);
+  }
+  50% {
+    box-shadow: inset 0 0 0 3px oklch(0.52 0.19 25 / 0.9);
+  }
+}
+
+@keyframes overduePulse {
+  0%,
+  100% {
+    box-shadow: inset 0 0 0 4px oklch(0.52 0.19 25 / 0.6);
+  }
+  50% {
+    box-shadow: inset 0 0 0 4px oklch(0.52 0.19 25), 0 0 60px
+      oklch(0.52 0.19 25 / 0.3);
+  }
+}
+
+@keyframes textPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes glowRed {
+  0%,
+  100% {
+    text-shadow: 0 0 20px oklch(0.52 0.19 25 / 0.4);
+  }
+  50% {
+    text-shadow: 0 0 40px oklch(0.52 0.19 25 / 0.8);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes emergencyPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 oklch(0.52 0.19 25 / 0.7);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 12px oklch(0.52 0.19 25 / 0);
+  }
+}
+
+.animate-focus-pulse {
+  animation: focusPulse 2s ease-in-out infinite;
+  will-change: box-shadow;
+}
+.animate-overdue-pulse {
+  animation: overduePulse 1.5s ease-in-out infinite;
+  will-change: box-shadow;
+}
+.animate-text-pulse {
+  animation: textPulse 2s ease-in-out infinite;
+  will-change: opacity;
+}
+.animate-glow-red {
+  animation: glowRed 2s ease-in-out infinite;
+}
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out;
+  will-change: transform, opacity;
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+  will-change: transform;
+}
+.animate-emergency {
+  animation: emergencyPulse 2s ease-in-out infinite;
+  will-change: transform, box-shadow;
+}
+
+.card-glow-red {
+  box-shadow: 0 0 0 1px oklch(0.52 0.19 25 / 0.4), 0 4px 32px
+    oklch(0.52 0.19 25 / 0.1);
+}
+.card-glow-green {
+  box-shadow: 0 0 0 1px oklch(0.62 0.17 152 / 0.4), 0 4px 32px
+    oklch(0.62 0.17 152 / 0.1);
+}
+.card-glow-amber {
+  box-shadow: 0 0 0 1px oklch(0.73 0.17 72 / 0.4), 0 4px 32px
+    oklch(0.73 0.17 72 / 0.1);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: oklch(0.09 0.008 228);
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.24 0.015 225);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.32 0.015 225);
+}
